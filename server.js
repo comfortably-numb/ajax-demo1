@@ -26,26 +26,18 @@ var server = http.createServer(function (request, response) {
   if (path === "/index.html") {
     response.statusCode = 200;
     response.setHeader("Content-Type", "text/html;charset=utf-8");
-    response.write(`<!DOCTYPE html>
-    <html>
-    <head>
-      <title>ajax</title>
-      <link
-    </head>
-
-    </html>`);
-    // let string = fs.readFileSync("public/index.html").toString();
-    // const page1 = fs.readFileSync("db/page1.json").toString();
-    // const array = JSON.parse(page1);
-    // const result = array.map((item) => `<li>${item.id}</li>`).join("");
-    // string = string.replace("{{page1}}", `<ul id="xxx">${result}</ul>`);
-    // response.write(string);
+    let string = fs.readFileSync("public/index.html").toString();
+    const page1 = fs.readFileSync("db/page1.json").toString();
+    const array = JSON.parse(page1);
+    const result = array.map((item) => `<li>${item.id}</li>`).join("");
+    string = string.replace("{{page1}}", `<ul id="xxx">${result}</ul>`);
+    response.write(string);
     response.end();
   } else if (path === "/main.js") {
     response.statusCode = 200;
     response.setHeader("Content-Type", "text/javascript;charset=utf-8");
-    response.write("console.log('dewd')");
-    // response.write(fs.readFileSync("public/main.js"));
+    response.write(fs.readFileSync("public/main.js"));
+    // response.write("console.log('dewd')");
     response.end();
   } else if (path === "/style.css" || path === "/2.css") {
     response.statusCode = 200;
